@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Plugin</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        button { padding: 10px 20px; font-size: 16px; }
-    </style>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 300px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
-    <h1>Simple Plugin</h1>
-    <button id="actionButton">Click me!</button>
-    <script src="popup.js"></script>
+  <div class="container">
+    <h2>定时提醒</h2>
+    <input type="number" id="seconds" placeholder="请输入秒数" min="1">
+    <button id="setTimer">设置提醒</button>
+  </div>
+  <script src="popup.js"></script>
 </body>
 </html>

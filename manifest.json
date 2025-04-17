@@ -3,9 +3,41 @@
   "name": "Simple Plugin",
   "version": "1.0",
   "description": "A simple Google Chrome extension.",
-  "permissions": ["activeTab"],
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "notifications",
+    "storage",
+    "tabs",
+    "tts",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*",
+    "file://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
   }
 }
