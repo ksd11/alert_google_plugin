@@ -129,30 +129,30 @@ chrome.alarms.onAlarm.addListener((alarm) => {
       console.log('通知权限级别：', level);
       if (level === 'granted') {
         // 1. 发送桌面通知
-        chrome.notifications.create({
-          type: 'basic',
-          iconUrl: 'icon.png',
-          title: '时间到！',
-          message: '您设置的计时器已完成',
-          priority: 2
-        }, (notificationId) => {
-          if (chrome.runtime.lastError) {
-            console.error('创建通知失败：', chrome.runtime.lastError);
-          } else {
-            console.log('通知创建成功，ID：', notificationId);
-          }
-        });
+        // chrome.notifications.create({
+        //   type: 'basic',
+        //   iconUrl: 'icon.png',
+        //   title: '时间到！',
+        //   message: '您设置的计时器已完成',
+        //   priority: 2
+        // }, (notificationId) => {
+        //   if (chrome.runtime.lastError) {
+        //     console.error('创建通知失败：', chrome.runtime.lastError);
+        //   } else {
+        //     console.log('通知创建成功，ID：', notificationId);
+        //   }
+        // });
 
         // 2. 使用语音提醒
-        chrome.tts.speak('时间到！您的计时器已完成', {
-          lang: 'zh-CN',
-          rate: 1.0,
-          onEvent: function(event) {
-            if (event.type === 'end') {
-              console.log('语音提醒结束');
-            }
-          }
-        });
+        // chrome.tts.speak('时间到！您的计时器已完成', {
+        //   lang: 'zh-CN',
+        //   rate: 1.0,
+        //   onEvent: function(event) {
+        //     if (event.type === 'end') {
+        //       console.log('语音提醒结束');
+        //     }
+        //   }
+        // });
 
         // 3. 向当前活动标签页发送消息以显示提醒
         chrome.tabs.query({active: true, currentWindow: true}, async function(tabs) {
