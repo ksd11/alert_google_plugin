@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>生成闹钟图标</title>
+</head>
+<body>
+    <canvas id="iconCanvas" width="128" height="128" style="border:1px solid #000;"></canvas>
+    <br>
+    <button onclick="downloadIcon()">下载图标</button>
+
+    <script>
+        function drawIcon() {
+            const canvas = document.getElementById('iconCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // 设置背景为透明
+            ctx.clearRect(0, 0, 128, 128);
+            
+            // 绘制闹钟外圈
+            ctx.beginPath();
+            ctx.arc(64, 64, 50, 0, Math.PI * 2);
+            ctx.fillStyle = '#4CAF50';
+            ctx.fill();
+            
+            // 绘制内圈
+            ctx.beginPath();
+            ctx.arc(64, 64, 45, 0, Math.PI * 2);
+            ctx.fillStyle = '#fff';
+            ctx.fill();
+            
+            // 绘制刻度
+            for (let i = 0; i < 12; i++) {
+                const angle = (i * Math.PI * 2) / 12;
+                const startX = 64 + Math.sin(angle) * 40;
+                const startY = 64 - Math.cos(angle) * 40;
+                const endX = 64 + Math.sin(angle) * 45;
+                const endY = 64 - Math.cos(angle) * 45;
+                
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                ctx.lineTo(endX, endY);
+                ctx.strokeStyle = '#4CAF50';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+            
+            // 绘制时针和分针
+            const now = new Date();
+            const hours = now.getHours() % 12;
+            const minutes = now.getMinutes();
+            
+            // 时针
+            const hourAngle = (hours + minutes / 60) * Math.PI * 2 / 12;
+            ctx.beginPath();
+            ctx.moveTo(64, 64);
+            ctx.lineTo(
+                64 + Math.sin(hourAngle) * 25,
+                64 - Math.cos(hourAngle) * 25
+            );
+            ctx.strokeStyle = '#4CAF50';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+            
+            // 分针
+            const minuteAngle = minutes * Math.PI * 2 / 60;
+            ctx.beginPath();
+            ctx.moveTo(64, 64);
+            ctx.lineTo(
+                64 + Math.sin(minuteAngle) * 35,
+                64 - Math.cos(minuteAngle) * 35
+            );
+            ctx.strokeStyle = '#4CAF50';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            // 绘制中心点
+            ctx.beginPath();
+            ctx.arc(64, 64, 5, 0, Math.PI * 2);
+            ctx.fillStyle = '#4CAF50';
+            ctx.fill();
+            
+            // 绘制闹钟顶部
+            ctx.beginPath();
+            ctx.moveTo(54, 24);
+            ctx.lineTo(74, 24);
+            ctx.lineTo(74, 34);
+            ctx.lineTo(54, 34);
+            ctx.closePath();
+            ctx.fillStyle = '#4CAF50';
+            ctx.fill();
+        }
+
+        function downloadIcon() {
+            const canvas = document.getElementById('iconCanvas');
+            const link = document.createElement('a');
+            link.download = 'icon.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // 初始绘制
+        drawIcon();
+    </script>
+</body>
+</html> 
